@@ -20,6 +20,8 @@ void insertion_sort(int *arr, int n);
 
 void quicksort(int *arr, int end, int begin);
 
+int binary_search(int *arr, int value, int start, int end);
+
 void print_array(int *arr, int n);
 
 void copy_array(const int *src, int *dest, int n);
@@ -44,13 +46,50 @@ void task_8();
 int main() {
     srand(time(nullptr));
     task_1();
-    task_2();
-    task_3();
-    task_4();
 
+    int choice;
+
+    do {
+        cout << "Choose a task to execute (1-8) or 0 to exit: ";
+        cin >> choice;
+        system("cls");
+
+        switch (choice) {
+            case 1:
+                task_1();
+                break;
+            case 2:
+                task_2();
+                break;
+            case 3:
+                task_3();
+                break;
+            case 4:
+                task_4();
+                break;
+            case 5:
+                task_5();
+                break;
+            case 6:
+                task_6();
+                break;
+            case 7:
+                task_7();
+                break;
+            case 8:
+                task_8();
+                break;
+            case 0:
+                cout << "Exiting the program." << endl;
+                break;
+            default:
+                cout << "Invalid choice. Please select a number from 0 to 8." << endl;
+                break;
+        }
+
+    } while (choice != 0);
 
 }
-
 
 void bubble_sort(int *arr, int n) {
     bool swapped;
@@ -158,6 +197,24 @@ void quicksort(int *arr, int end, int begin) {
     if (f < end) quicksort(arr, end, f);
 }
 
+int binary_search(int *arr, int value, int start, int end) {
+    if (end >= start) {
+        int mid = start + (end - start) / 2;
+
+        if (arr[mid] == value) {
+            return mid;
+        }
+
+        if (arr[mid] > value) {
+            return binary_search(arr, value, start, mid - 1);
+        }
+
+        return binary_search(arr, value, mid + 1, end);
+    }
+
+    return -1;
+}
+
 void print_array(int *arr, int n) {
     for (int i = 0; i < n; ++i) {
         cout << arr[i] << " ";
@@ -179,6 +236,11 @@ void task_1() {
 
     cout << "Unsorted array:" << endl;
     print_array(unsorted_array, N);
+
+    cout << "Sorted array:" << endl;
+    copy_array(unsorted_array, sorted_array, N);
+    quicksort(sorted_array, N - 1, 0);
+    print_array(sorted_array, N);
 }
 
 void task_2() {
@@ -188,7 +250,7 @@ void task_2() {
     bubble_sort(sorted_array, N);
     end_time = steady_clock::now();
     result_time = duration_cast<nanoseconds>(end_time - start_time);
-    cout << "Bubble sort, ns: " << result_time.count() << endl;
+    cout << "Bubble sort, ns:\t" << result_time.count() << endl;
     //print_array(sorted_array, N);
 
     copy_array(unsorted_array, sorted_array, N);
@@ -196,7 +258,7 @@ void task_2() {
     shaker_sort(sorted_array, N);
     end_time = steady_clock::now();
     result_time = duration_cast<nanoseconds>(end_time - start_time);
-    cout << "Shaker sort, ns: " << result_time.count() << endl;
+    cout << "Shaker sort, ns:\t" << result_time.count() << endl;
     //print_array(sorted_array, N);
 
     copy_array(unsorted_array, sorted_array, N);
@@ -204,7 +266,7 @@ void task_2() {
     comb_sort(sorted_array, N);
     end_time = steady_clock::now();
     result_time = duration_cast<nanoseconds>(end_time - start_time);
-    cout << "Comb sort, ns: " << result_time.count() << endl;
+    cout << "Comb sort, ns  :\t" << result_time.count() << endl;
     //print_array(sorted_array, N);
 
     copy_array(unsorted_array, sorted_array, N);
@@ -212,7 +274,7 @@ void task_2() {
     insertion_sort(sorted_array, N);
     end_time = steady_clock::now();
     result_time = duration_cast<nanoseconds>(end_time - start_time);
-    cout << "Insertion sort, ns: " << result_time.count() << endl;
+    cout << "Insertion sort, ns:\t" << result_time.count() << endl;
     //print_array(sorted_array, N);
 
     copy_array(unsorted_array, sorted_array, N);
@@ -220,7 +282,7 @@ void task_2() {
     quicksort(sorted_array, N - 1, 0);
     end_time = steady_clock::now();
     result_time = duration_cast<nanoseconds>(end_time - start_time);
-    cout << "Quick sort, ns: " << result_time.count() << endl;
+    cout << "Quick sort, ns: \t" << result_time.count() << endl;
     //print_array(sorted_array, N);
 }
 
@@ -287,4 +349,77 @@ void task_4() {
     result_time = duration_cast<nanoseconds>(end_time - start_time);
     cout << endl << "Indexes count: " << count << endl;
     cout << "Time spent in sorted array, ns: " << result_time.count() << endl;
+}
+
+void task_5() {
+    cout << "--- task #5 ----" << endl;
+    copy_array(unsorted_array, sorted_array, N);
+    quicksort(sorted_array, N - 1, 0);
+    int a, counter = 0;
+    print_array(sorted_array, N);
+    cout << "Enter number to count less elements: ";
+    cin >> a;
+    while (sorted_array[counter++] < a);
+    cout << "Result: " << --counter << endl;
+}
+
+void task_6() {
+    cout << "--- task #6 ----" << endl;
+    copy_array(unsorted_array, sorted_array, N);
+    quicksort(sorted_array, N - 1, 0);
+    int b, counter = N - 1;
+    print_array(sorted_array, N);
+    cout << "Enter number to count greater elements: ";
+    cin >> b;
+    while (sorted_array[counter--] > b);
+    cout << "Result: " << N - counter - 2 << endl;
+}
+
+void task_7() {
+    cout << "--- task #7 ----" << endl;
+    copy_array(unsorted_array, sorted_array, N);
+    quicksort(sorted_array, N - 1, 0);
+    int number, index = -1;
+    print_array(sorted_array, N);
+    cout << "Enter number to search in array: ";
+    cin >> number;
+
+    start_time = steady_clock::now();
+    for (int i = 0; i < N; ++i) {
+        if (sorted_array[i] == number) {
+            index = i + 1;
+            break;
+        }
+    }
+    end_time = steady_clock::now();
+
+    if (index == -1) {
+        cout << "Not found" << endl;
+    } else {
+        cout << "Found at " << index << " position" << endl;
+    }
+    result_time = duration_cast<nanoseconds>(end_time - start_time);
+    cout << "Time spent, simple search, ns: " << result_time.count() << endl;
+
+    start_time = steady_clock::now();
+    index = binary_search(sorted_array, number, 0, N - 1);
+    end_time = steady_clock::now();
+    result_time = duration_cast<nanoseconds>(end_time - start_time);
+    cout << "Time spent, binary search, ns: " << result_time.count() << endl;
+}
+
+void task_8() {
+    cout << "--- task #8 ----" << endl;
+    cout << "Array:" << endl;
+    print_array(unsorted_array, N);
+    cout << "Enter two indexes for swap: ";
+    int i1, i2;
+    cin >> i1 >> i2;
+    start_time = steady_clock::now();
+    swap(unsorted_array[i1], unsorted_array[i2]);
+    end_time = steady_clock::now();
+    result_time = duration_cast<nanoseconds>(end_time - start_time);
+    cout << "Time spent for swap, ns: " << result_time.count() << endl;
+    cout << "New array:" << endl;
+    print_array(unsorted_array, N);
 }
