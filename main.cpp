@@ -251,7 +251,6 @@ void task_2() {
     end_time = steady_clock::now();
     result_time = duration_cast<nanoseconds>(end_time - start_time);
     cout << "Bubble sort, ns:\t" << result_time.count() << endl;
-    //print_array(sorted_array, N);
 
     copy_array(unsorted_array, sorted_array, N);
     start_time = steady_clock::now();
@@ -259,7 +258,6 @@ void task_2() {
     end_time = steady_clock::now();
     result_time = duration_cast<nanoseconds>(end_time - start_time);
     cout << "Shaker sort, ns:\t" << result_time.count() << endl;
-    //print_array(sorted_array, N);
 
     copy_array(unsorted_array, sorted_array, N);
     start_time = steady_clock::now();
@@ -267,7 +265,6 @@ void task_2() {
     end_time = steady_clock::now();
     result_time = duration_cast<nanoseconds>(end_time - start_time);
     cout << "Comb sort, ns  :\t" << result_time.count() << endl;
-    //print_array(sorted_array, N);
 
     copy_array(unsorted_array, sorted_array, N);
     start_time = steady_clock::now();
@@ -275,7 +272,6 @@ void task_2() {
     end_time = steady_clock::now();
     result_time = duration_cast<nanoseconds>(end_time - start_time);
     cout << "Insertion sort, ns:\t" << result_time.count() << endl;
-    //print_array(sorted_array, N);
 
     copy_array(unsorted_array, sorted_array, N);
     start_time = steady_clock::now();
@@ -283,7 +279,6 @@ void task_2() {
     end_time = steady_clock::now();
     result_time = duration_cast<nanoseconds>(end_time - start_time);
     cout << "Quick sort, ns: \t" << result_time.count() << endl;
-    //print_array(sorted_array, N);
 }
 
 void task_3() {
