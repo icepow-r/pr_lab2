@@ -42,6 +42,8 @@ void task_7();
 
 void task_8();
 
+void task_9();
+
 
 int main() {
     srand(time(nullptr));
@@ -50,7 +52,7 @@ int main() {
     int choice;
 
     do {
-        cout << "Choose a task to execute (1-8) or 0 to exit: ";
+        cout << "Choose a task to execute (1-9) or 0 to exit: ";
         cin >> choice;
         system("cls");
 
@@ -78,6 +80,9 @@ int main() {
                 break;
             case 8:
                 task_8();
+                break;
+            case 9:
+                task_9();
                 break;
             case 0:
                 cout << "Exiting the program." << endl;
@@ -417,4 +422,29 @@ void task_8() {
     cout << "Time spent for swap, ns: " << result_time.count() << endl;
     cout << "New array:" << endl;
     print_array(unsorted_array, N);
+}
+
+void task_9() {
+    cout << "--- individual homework #9 ----" << endl;
+    cout << "Array:" << endl;
+    print_array(unsorted_array, N);
+    cout << "Enter number: ";
+    int number;
+    cin >> number;
+    for (int i = 1; i < N; i += 2) {
+        unsorted_array[i] -= number;
+        unsorted_array[i] *= rand() % 9 + 1;
+    }
+    cout << "New array:" << endl;
+    print_array(unsorted_array, N);
+    cout << "Number of elements that are divisible by:" << endl;
+    for (int i = 1; i < 10; ++i) {
+        int counter = 0;
+        for (int j = 0; j < N; ++j) {
+            if (unsorted_array[j] % i == 0) {
+                counter++;
+            }
+        }
+        cout << i << " - " << counter << endl;
+    }
 }
